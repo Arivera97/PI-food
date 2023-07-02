@@ -1,17 +1,17 @@
-const { Router } = require("express");
+const { Router } = require('express')
 const {
   getRecipeHandler,
   getRecipesHandler,
   createRecipesHandler,
-} = require("../handlers/RecipesHandler");
+} = require('../handlers/RecipesHandler')
 
-const recipes = Router();
+const recipes = Router()
 
 //Ruta para ver TODAS LAS RECETAS
-recipes.get("/", getRecipesHandler);
+recipes.get('/', getRecipesHandler)
 // Ruta para obtener el detalle de una receta específica por su ID
-recipes.get("/:id", getRecipeHandler);
+recipes.get('/:id', getRecipeHandler)
 // Ruta para crear una nueva receta
-recipes.post("/", createRecipesHandler);
+recipes.post('/', createRecipesHandler)
 
-module.exports = recipes;
+module.exports = recipes
