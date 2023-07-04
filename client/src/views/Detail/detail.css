@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&family=Poppins:ital,wght@0,200;0,600;1,100;1,200&display=swap');
+.body-detail {
+  background-image: url(../../images/bg.png);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 20px;
+  height: 160%;
+}
+
+.container-detail {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  margin: 20px auto; /* Agrega margen superior e inferior para separar del navbar */
+  background-color: white;
+  padding: 0 6%;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 50vh;
+  margin-bottom: 0;
+}
+
+.title-detail {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  color: #000000;
+  font-size: 20px;
+  align-items: center;
+}
+
+.image-detail {
+  margin-top: 20px;
+}
+
+.image-detail img {
+  width: 50vh;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hearth-score p {
+  font-size: 24px;
+}

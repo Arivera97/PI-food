@@ -9,6 +9,7 @@ export const DIET_FILTER = 'DIET_FILTER'
 export const ORDER_SCORE = 'ORDER_SCORE'
 export const POST_RECIPE = 'POST_RECIPE'
 export const GET_DETAIL_RECIPE = 'GET_DETAIL_RECIPE'
+export const GET_DETAIL_RECIPE_ID = 'GET_DETAIL_RECIPE_ID'
 
 const URL_API = 'http://localhost:3001'
 
@@ -54,6 +55,21 @@ export function getDetailRecipe(name) {
       }
     } else {
       dispatch({ type: GET_DETAIL_RECIPE })
+    }
+  }
+}
+
+export function getDetailRecipeId(id) {
+  const urlDetailRecipe = `${URL_API}/recipes/${id}`
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(urlDetailRecipe)
+      const data = response.data
+      await dispatch({ type: GET_DETAIL_RECIPE_ID, payload: data })
+    } catch (error) {
+      // Manejo de errores si la solicitud falla
+      console.log(error)
+      dispatch({ type: GET_DETAIL_RECIPE_ID, payload: null })
     }
   }
 }

@@ -1,0 +1,28 @@
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: 'Poppins', sans-serif;
+}
+
+.title-home {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+.not-found {
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(239, 237, 237);
+  width: 100%;
+}

@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { Recipe } = require('../db')
+const { Recipe, Diet } = require('../db')
 const API_KEY = process.env.API_KEY
 const { Sequelize } = require('sequelize')
 
@@ -15,6 +15,7 @@ const cleanArray = (arr) =>
         elem.analyzedInstructions[0] && elem.analyzedInstructions[0].steps
           ? elem.analyzedInstructions[0].steps.map((s) => s.step)
           : '',
+      Diets: elem.diets || [],
       created: false,
     }
   })
@@ -22,7 +23,7 @@ const cleanArray = (arr) =>
 const cleanObject = (obj) => {
   return {
     id: obj.id,
-    name: obj.name,
+    name: obj.title,
     summary: obj.summary,
     heart_score: obj.healthScore,
     imagen: obj.image,
@@ -61,10 +62,18 @@ const getRecipeById = async (id, source) => {
 }
 
 const getAllRecipes = async () => {
-  const databaseRecipes = await Recipe.findAll()
+  const databaseRecipes = await Recipe.findAll({
+    include: [
+      {
+        model: Diet,
+        attributes: ['name'], // Obtener solo el campo "name" de la tabla "Diet"
+      },
+    ],
+  })
+
   const apiRecipesRaw = (
     await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=100&apiKey=${API_KEY}`
+      `http://localhost:8080/recipes/complexSearch?addRecipeInformation=true&number=100&apiKey=${API_KEY}`
     )
   ).data.results
 
