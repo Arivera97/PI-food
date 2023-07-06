@@ -3,11 +3,5 @@
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-.buscador {
-  height: 10vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 240vh;
 }

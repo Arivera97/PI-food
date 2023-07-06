@@ -6,7 +6,6 @@ export const ORDER_ALPHA = 'ORDER_ALPHA'
 export const GET_ALL_DIETS = 'GET_ALL_DIETS'
 export const ORIGIN_FILTER = 'ORIGIN_FILTER'
 export const DIET_FILTER = 'DIET_FILTER'
-export const ORDER_SCORE = 'ORDER_SCORE'
 export const POST_RECIPE = 'POST_RECIPE'
 export const GET_DETAIL_RECIPE = 'GET_DETAIL_RECIPE'
 export const GET_DETAIL_RECIPE_ID = 'GET_DETAIL_RECIPE_ID'
@@ -17,9 +16,13 @@ export function getAllRecipes(loading) {
   const urlAllRecipes = `${URL_API}/recipes`
   return async function (dispatch) {
     if (!loading) {
-      const r = await fetch(urlAllRecipes)
-      const data = await r.json()
-      await dispatch({ type: GET_ALL_RECIPES, payload: data })
+      try {
+        const response = await axios.get(urlAllRecipes)
+        dispatch({ type: GET_ALL_RECIPES, payload: response.data })
+      } catch (error) {
+        console.error(error)
+        dispatch({ type: GET_ALL_RECIPES, payload: [] })
+      }
     } else {
       dispatch({ type: GET_ALL_RECIPES, payload: [] })
     }
@@ -29,9 +32,13 @@ export function getAllRecipes(loading) {
 export function getDiets() {
   const urlAllDiets = `${URL_API}/diets`
   return async function (dispatch) {
-    const r = await fetch(urlAllDiets)
-    const data = await r.json()
-    await dispatch({ type: GET_ALL_DIETS, payload: data })
+    try {
+      const response = await axios.get(urlAllDiets)
+      dispatch({ type: GET_ALL_DIETS, payload: response.data })
+    } catch (error) {
+      console.error(error)
+      dispatch({ type: GET_ALL_DIETS, payload: [] })
+    }
   }
 }
 
@@ -47,9 +54,8 @@ export function getDetailRecipe(name) {
   return async function (dispatch) {
     if (name) {
       try {
-        const r = await fetch(urlDetail)
-        const data = await r.json()
-        await dispatch({ type: GET_DETAIL_RECIPE, payload: data })
+        const response = await axios.get(urlDetail)
+        dispatch({ type: GET_DETAIL_RECIPE, payload: response.data })
       } catch (error) {
         dispatch({ type: GET_DETAIL_RECIPE, payload: null })
       }
@@ -64,10 +70,8 @@ export function getDetailRecipeId(id) {
   return async function (dispatch) {
     try {
       const response = await axios.get(urlDetailRecipe)
-      const data = response.data
-      await dispatch({ type: GET_DETAIL_RECIPE_ID, payload: data })
+      dispatch({ type: GET_DETAIL_RECIPE_ID, payload: response.data })
     } catch (error) {
-      // Manejo de errores si la solicitud falla
       console.log(error)
       dispatch({ type: GET_DETAIL_RECIPE_ID, payload: null })
     }
@@ -88,24 +92,21 @@ export function filterByDiet(diet) {
   }
 }
 
-export function filterByOrigin(diet) {
+export function originFilter(origin) {
   return {
     type: ORIGIN_FILTER,
-    payload: diet,
-  }
-}
-
-export function orderByHealthScore(score) {
-  return {
-    type: ORDER_SCORE,
-    payload: score,
+    payload: origin,
   }
 }
 
 export function postRecipe(data) {
-  return async function (dispatch) {
-    const r = axios.post(`${URL_API}/recipes`, data)
-    console.log(r)
-    return r
+  return async function () {
+    try {
+      const response = await axios.post(`${URL_API}/recipes`, data)
+      console.log(response)
+      return response
+    } catch (error) {
+      console.error(error)
+    }
   }
 }

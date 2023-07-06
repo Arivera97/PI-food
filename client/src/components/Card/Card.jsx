@@ -8,23 +8,26 @@ const Card = ({ name, heart_score, id, imagen, diets, dietsDB }) => {
   }
 
   const dietsString = diets?.join(', ')
-  const isObjectString = dietsString === '[object Object]'
+  const dietsString2 = dietsDB?.filter((item) => item !== undefined)?.join(', ')
+  const containsObjectString =
+    dietsString && dietsString.includes('[object Object]')
 
+  console.log(dietsDB)
   return (
     <div className="card">
       <h3 className="card-title">{name}</h3>
       <img src={imagen} alt="Recetas" />
       <p>❤️{heart_score}</p>
-      {isObjectString ? (
-        <p className="hidden">{dietsString}</p>
+      {containsObjectString ? (
+        <p className="hidden">Diets not available</p>
       ) : (
         <p>{dietsString}</p>
       )}
-      <p>{dietsDB}</p>
+      {dietsString2 && <p>{dietsString2}</p>}
       <div className="div-button">
         {id && (
           <Link to={`/detail/${id}`}>
-            <button className="Link">Ver Receta</button>
+            <button className="Link">View Recipe</button>
           </Link>
         )}
       </div>

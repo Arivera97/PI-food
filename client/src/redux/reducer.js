@@ -5,7 +5,6 @@ import {
   GET_ALL_DIETS,
   ORIGIN_FILTER,
   DIET_FILTER,
-  ORDER_SCORE,
   GET_DETAIL_RECIPE,
   GET_DETAIL_RECIPE_ID,
 } from './actions'
@@ -42,7 +41,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         diets: payload,
       }
-      
 
     case GET_SEARCH_RECIPES:
       const filterName = state.allRecipes.filter((element) =>
@@ -55,7 +53,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       }
 
     case ORDER_ALPHA:
-      if (payload === 'a-z') {
+      if (payload === 'asc') {
         return {
           ...state,
           temporal: sort_list('name', state.temporal),
@@ -66,19 +64,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
           temporal: sort_list('name', state.temporal, true),
         }
       } // Agrega esta llave de cierre para cerrar el caso ORDER_ALPHA
-
-    case ORDER_SCORE:
-      if (payload === 'asc') {
-        return {
-          ...state,
-          temporal: sort_list('healthScore', state.temporal),
-        }
-      } else {
-        return {
-          ...state,
-          temporal: sort_list('healthScore', state.temporal, true),
-        }
-      }
 
     case GET_DETAIL_RECIPE:
       return {
@@ -95,9 +80,18 @@ const rootReducer = (state = initialState, { type, payload }) => {
       }
       return {
         ...state,
-        temporal: state.temporal.filter((recipe) =>
-          recipe.diets.includes(payload)
-        ),
+        temporal: state.allRecipes.filter((recipe) => {
+          const diets = recipe.Diets
+          if (Array.isArray(diets)) {
+            const dietNames = diets.map((diet) =>
+              typeof diet === 'string'
+                ? diet.toLowerCase()
+                : diet.name.toLowerCase()
+            )
+            return dietNames.includes(payload.toLowerCase())
+          }
+          return false
+        }),
       }
 
     case ORIGIN_FILTER:
@@ -105,22 +99,22 @@ const rootReducer = (state = initialState, { type, payload }) => {
         return {
           ...state,
           temporal: state.allRecipes,
+          originFilter: 'all',
         }
       } else if (payload === 'api') {
         return {
           ...state,
-          temporal: state.allRecipes.filter(
-            (recipe) => !recipe.hasOwnProperty('createInDb')
-          ),
+          temporal: state.allRecipes.filter((recipe) => !recipe.created),
+          originFilter: 'api',
         }
       } else {
         return {
           ...state,
-          temporal: state.allRecipes.filter((recipe) =>
-            recipe.hasOwnProperty('createInDb')
-          ),
+          temporal: state.allRecipes.filter((recipe) => recipe.created),
+          originFilter: 'database',
         }
       }
+
     case GET_DETAIL_RECIPE_ID:
       return {
         ...state,
