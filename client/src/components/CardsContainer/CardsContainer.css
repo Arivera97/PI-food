@@ -61,66 +61,55 @@
   background-color: #ff6600;
 }
 
-.order-buttons {
+.select-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.order-buttons button {
-  background-color: rgb(255, 179, 3);
-  color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 100px;
-  padding: 8px 16px;
-  cursor: pointer;
-  margin: 0 5px;
-  font-size: 14px;
-  border: none;
-}
-
-.order-buttons button.active {
-  background-color: #ff6600;
-  color: #ffffff;
-}
-
-.order-buttons button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.order-buttons button:hover {
-  background-color: #ff6600;
-}
-
-.filter-buttons {
+.order-select,
+.filter-select {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.filter-buttons button {
-  background-color: rgb(255, 179, 3);
-  color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 100px;
-  padding: 8px 16px;
-  cursor: pointer;
-  margin: 0 5px;
-  font-size: 14px;
-  border: none;
+.order-select select,
+.filter-select select {
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-size: 16px;
+  color: #555;
+  font-family: 'Arial', sans-serif;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100px;
 }
 
-.filter-buttons button.active {
-  background-color: #ff6600;
-  color: #ffffff;
+.order-select select:focus,
+.filter-select select:focus {
+  outline: none;
+  border-color: #aaa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.filter-buttons button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.order-select select option,
+.filter-select select option {
+  background-color: #fff;
+  color: #555;
 }
 
-.filter-buttons button:hover {
-  background-color: #ff6600;
+.order-select select option:hover,
+.filter-select select option:hover {
+  background-color: #f1f1f1;
+}
+
+.order-select select option:checked,
+.filter-select select option:checked {
+  background-color: #ddd;
 }

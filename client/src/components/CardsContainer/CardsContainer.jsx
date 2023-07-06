@@ -71,48 +71,39 @@ const CardsContainer = () => {
   return (
     <>
       <h1 className="title-home">Visit our Recipes</h1>
-      <div className="order-buttons">
-            <button onClick={handleOrderByAlphabetical}>
-              {order === 'asc' ? 'A-Z' : 'Z-A'}
-            </button>
-          </div>
-      <div className="filter-buttons">
-        <button
-          className={selectedDiet === 'all' ? 'active' : ''}
-          onClick={() => handleFilterByDiet('all')}
-        >
-          All Diets
-        </button>
-        {diets.map((diet) => (
-          <button
-            key={diet.name}
-            className={selectedDiet === diet.name ? 'active' : ''}
-            onClick={() => handleFilterByDiet(diet.name)}
-          >
-            {diet.name}
-          </button>
-        ))}
-      </div>
+      <br />
+      <div className="select-container">
+        <div className="order-select">
+          <select value={order} onChange={handleOrderByAlphabetical}>
+            <option value="asc">A-Z</option>
+            <option value="desc">Z-A</option>
+          </select>
+        </div>
 
-      <div className="filter-buttons">
-        <button
-          className={selectedOrigin === 'all' ? 'active' : ''}
-          onClick={() => handleFilterByOrigin('all')}
-        >
-          All Origins
-        </button>
-        <button
-          className={selectedOrigin === 'api' ? 'active' : ''}
-          onClick={() => handleFilterByOrigin('api')}
-        >
-          API
-        </button>
-        <button
-          className={selectedOrigin === 'database' ? 'active' : ''}
-          onClick={() => handleFilterByOrigin('database')}
-        >
-          Database
-        </button>
+        <div className="filter-select">
+          <select
+            value={selectedDiet}
+            onChange={(e) => handleFilterByDiet(e.target.value)}
+          >
+            <option value="all">All Diets</option>
+            {diets.map((diet) => (
+              <option key={diet.name} value={diet.name}>
+                {diet.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="filter-select">
+          <select
+            value={selectedOrigin}
+            onChange={(e) => handleFilterByOrigin(e.target.value)}
+          >
+            <option value="all">All Origins</option>
+            <option value="api">API</option>
+            <option value="database">Database</option>
+          </select>
+        </div>
       </div>
 
       {currentRecipes.length === 0 ? (

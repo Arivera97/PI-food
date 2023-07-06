@@ -29,10 +29,10 @@ const Search = () => {
         onChange={handleInputChange}
       />
       <button className="btn-search" onClick={handleSearch}>
-        Buscar
+        Search
       </button>
       <button className="btn-reset" onClick={handleReset}>
-        Borrar
+        Delate
       </button>
     </div>
   )
