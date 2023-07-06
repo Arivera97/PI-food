@@ -71,6 +71,49 @@ const CardsContainer = () => {
   return (
     <>
       <h1 className="title-home">Visit our Recipes</h1>
+      <div className="order-buttons">
+            <button onClick={handleOrderByAlphabetical}>
+              {order === 'asc' ? 'A-Z' : 'Z-A'}
+            </button>
+          </div>
+      <div className="filter-buttons">
+        <button
+          className={selectedDiet === 'all' ? 'active' : ''}
+          onClick={() => handleFilterByDiet('all')}
+        >
+          All Diets
+        </button>
+        {diets.map((diet) => (
+          <button
+            key={diet.name}
+            className={selectedDiet === diet.name ? 'active' : ''}
+            onClick={() => handleFilterByDiet(diet.name)}
+          >
+            {diet.name}
+          </button>
+        ))}
+      </div>
+
+      <div className="filter-buttons">
+        <button
+          className={selectedOrigin === 'all' ? 'active' : ''}
+          onClick={() => handleFilterByOrigin('all')}
+        >
+          All Origins
+        </button>
+        <button
+          className={selectedOrigin === 'api' ? 'active' : ''}
+          onClick={() => handleFilterByOrigin('api')}
+        >
+          API
+        </button>
+        <button
+          className={selectedOrigin === 'database' ? 'active' : ''}
+          onClick={() => handleFilterByOrigin('database')}
+        >
+          Database
+        </button>
+      </div>
 
       {currentRecipes.length === 0 ? (
         <div className="not-found">
@@ -125,51 +168,6 @@ const CardsContainer = () => {
               </>
             )}
             <button onClick={nextPage}>Next</button>
-          </div>
-
-          <div className="order-buttons">
-            <button onClick={handleOrderByAlphabetical}>
-              {order === 'asc' ? 'A-Z' : 'Z-A'}
-            </button>
-          </div>
-
-          <div className="filter-buttons">
-            <button
-              className={selectedDiet === 'all' ? 'active' : ''}
-              onClick={() => handleFilterByDiet('all')}
-            >
-              All Diets
-            </button>
-            {diets.map((diet) => (
-              <button
-                key={diet.name}
-                className={selectedDiet === diet.name ? 'active' : ''}
-                onClick={() => handleFilterByDiet(diet.name)}
-              >
-                {diet.name}
-              </button>
-            ))}
-          </div>
-
-          <div className="filter-buttons">
-            <button
-              className={selectedOrigin === 'all' ? 'active' : ''}
-              onClick={() => handleFilterByOrigin('all')}
-            >
-              All Origins
-            </button>
-            <button
-              className={selectedOrigin === 'api' ? 'active' : ''}
-              onClick={() => handleFilterByOrigin('api')}
-            >
-              API
-            </button>
-            <button
-              className={selectedOrigin === 'database' ? 'active' : ''}
-              onClick={() => handleFilterByOrigin('database')}
-            >
-              Database
-            </button>
           </div>
         </>
       )}

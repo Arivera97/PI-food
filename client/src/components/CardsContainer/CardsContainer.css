@@ -60,3 +60,67 @@
 .pagination button:hover {
   background-color: #ff6600;
 }
+
+.order-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.order-buttons button {
+  background-color: rgb(255, 179, 3);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin: 0 5px;
+  font-size: 14px;
+  border: none;
+}
+
+.order-buttons button.active {
+  background-color: #ff6600;
+  color: #ffffff;
+}
+
+.order-buttons button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.order-buttons button:hover {
+  background-color: #ff6600;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.filter-buttons button {
+  background-color: rgb(255, 179, 3);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin: 0 5px;
+  font-size: 14px;
+  border: none;
+}
+
+.filter-buttons button.active {
+  background-color: #ff6600;
+  color: #ffffff;
+}
+
+.filter-buttons button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.filter-buttons button:hover {
+  background-color: #ff6600;
+}
